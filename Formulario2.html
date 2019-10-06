@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario 2</title>
+</head>
+<body>
+	<form action="#">
+		<legend>¿Cual es la mejor descripción de una variable?</legend>
+		<input type="radio" name="variable" value="0"><label>Un método para unir cadenas</label>
+		<input type="radio" name="variable" value="1"><label>Le permite almacenar información para que pueda ser reutilizada en todo el programa</label>
+		<input type="radio" name="variable" value="2"><label>Le permite tomar una decision basada en una condicion</label>
+		<br><br>
+		<legend>¿Cual es la mejor descripción de la concatenación?</legend>
+		<input type="radio" name="concatenacion" value="0"><label>Un método para unir cadenas</label>
+		<input type="radio" name="concatenacion" value="1"><label>Le permite almacenar información para que pueda ser reutilizada en todo el programa</label>
+		<input type="radio" name="concatenacion" value="2"><label>Le permite tomar una decision basada en una condicion</label>
+		<br><br>
+		<legend>¿Cual es la mejor descripción de la instrucción if?</legend>
+		<input type="radio" name="if" value="0"><label>Un método para unir cadenas</label>
+		<input type="radio" name="if" value="1"><label>Le permite almacenar información para que pueda ser reutilizada en todo el programa</label>
+		<input type="radio" name="if" value="2"><label>Le permite tomar una decision basada en una condicion</label>
+		<br><br>
+		<input type="button" value="Calificación" onclick="calificacion()">
+	</form>
+	<p id="calificacion">Tu calificación es: </p>
+	<script type="text/javascript">
+		function calificacion(){
+			var radios = document.querySelectorAll("input[type='radio']");
+			var variableRespondida = false;
+			var concatenacionRespondida = false;
+			var ifRespondida = false;
+			var respuestaVariable;
+			var respuestaConcatenacion;
+			var respuestaIf;
+			var numeroAciertos = 0;
+			for (let i=0; i<radios.length; i++){
+				if (radios[i].name == "variable" && radios[i].checked == true){
+					variableRespondida = true;
+					respuestaVariable = radios[i].value;
+					if (respuestaVariable == 1){
+						numeroAciertos = numeroAciertos + 1;
+					}
+				}
+				if (radios[i].name == "concatenacion" && radios[i].checked == true){
+					concatenacionRespondida = true;
+					respuestaConcatenacion = radios[i].value;
+					if (respuestaConcatenacion == 0){
+						numeroAciertos = numeroAciertos + 1;
+					}
+				}
+				if (radios[i].name == "if" && radios[i].checked == true){
+					ifRespondida = true;
+					respuestaIf = radios[i].value;
+					if (respuestaIf == 2){
+						numeroAciertos = numeroAciertos + 1;
+					}
+				}
+			}
+			if (variableRespondida && concatenacionRespondida && ifRespondida){
+					switch (numeroAciertos){
+						case 0:
+							document.getElementById("calificacion").innerHTML = "Tu calificación es: No creo que hayas estudiado.";
+							break;
+						case 1:
+							document.getElementById("calificacion").innerHTML = "Tu calificación es: Necesitas estudiar más tiempo. Inténtalo de nuevo.";
+							break;
+						case 2:
+							document.getElementById("calificacion").innerHTML = ("Tu calificación es: Vas por buen camino.");
+							break;
+						case 3:
+							document.getElementById("calificacion").innerHTML = "Tu calificación es: ¡Eres un profesional de JavaScript!";
+							break;
+					}			
+			}
+			else{
+				console.log("Todas las respuestas no estan contestadas");
+			}
+		}
+	</script>
+</body>
+</html>

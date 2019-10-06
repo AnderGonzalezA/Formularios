@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario 1</title>
+	<meta charset="utf-8">
+	<style>
+		#contenedor{display:flex;width:80%;flex-direction: row;justify-content:space-around;}
+	</style>
+
+
+</head>
+<body>
+	<div id="contenedor">
+		<form id="formu" method="POST" action="#">
+			<h2>Recogida y procesamiento de datos en un formulario</h2>
+			<label>Nombre del cliente: </label><input id="nombre" name="nombre" type="text">
+			<br><br>
+			<label>Material de la caja:</label><select size="1" name="materiales" id="materiales">
+				<option value="madera">Madera</option>
+				<option value="hierro">Hierro</option>
+				<option value="acero">Acero</option>
+				<option value="diamante">Diamante</option>
+			</select>
+			<br><br>
+			<legend>Seleccione una dimensión para la caja:</legend>
+			<input type="radio" value="diminuta" name="dimension"><label>Diminuta</label> 
+			<input type="radio" value="mediano" name="dimension" checked = "true"><label>Mediano</label>
+			<input type="radio" value="grande" name="dimension"><label>Grande</label>
+			<br><br>
+			<label>Comentarios</label><textarea id="comentarios" name="comentarios"></textarea>
+			<br><br>
+			<input type="button" value="Ver seleccion" onClick="verSeleccion()">
+		</form>
+	</div>
+
+	<script>
+		var comentarios = document.getElementById("comentarios");
+		function verSeleccion(){
+        	if (document.getElementById("nombre").value){
+        		var nombre = document.getElementById("nombre").value;
+        		var material = document.getElementById("materiales").value;
+        		var radio = document.querySelectorAll("input[type='radio']");
+        		var dimension;
+        		for (let i = 0; i<radio.length; i++){
+        			if (radio[i].checked == true){
+        				dimension = radio[i].value;
+        			}
+        		}
+        		if (isNaN(nombre)){
+        			comentarios.innerHTML += nombre + "&#13;&#10;" + material + "&#13;&#10;" + dimension + "&#13;&#10;&#13;&#10;"; 
+        		}
+        		else{
+        			console.log("Inserta un nombre de verdad");
+        		}
+        	}else{
+        		console.log("Inserta tu nombre");
+        	}
+	    }
+	</script>	
+</body>
+</html>

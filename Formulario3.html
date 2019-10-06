@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario 3</title>
+</head>
+<body>
+	<form action="#">
+		<h1>¿Cual es la capital de los siguientes países?</h1>
+		<legend>España</legend>
+		<input type="radio" name="españa" value="madrid"><label>Madrid</label>
+		<input type="radio" name="españa" value="paris"><label>Paris</label>
+		<input type="radio" name="españa" value="lisboa"><label>Lisboa</label>
+		<br><br>
+		<label>Francia</label>
+		<select size="1" name="francia" id="francia">
+				<option value="madrid">Madrid</option>
+				<option value="paris">Paris</option>
+				<option value="lisboa">Lisboa</option>
+		</select>
+		<br><br>
+		<label>Portugal</label>
+		<input list="capitales" name="portugal" id="portugal">
+		<datalist id="capitales">
+			<option value="Madrid">
+			<option value="Paris">
+			<option value="Lisboa">
+		</datalist>
+		<br><br>
+		<div id="after_submit" style="display: none;" name="">kaixo</div>
+		<input type="button" value="I'm finished" onclick="calificacion()">
+	</form>
+	<script type="text/javascript">
+		function calificacion(){
+			var numeroAciertos = 0;
+			var radio = document.querySelectorAll("input[type='radio']");
+			var respuestasRespondidas = false;
+			for (let i=0; i<radio.length; i++){
+				if (radio[i].checked == true){
+					respuestaRadio = radio[i].value;
+					console.log(respuestaRadio);
+					if (respuestaRadio == "madrid"){
+						numeroAciertos = numeroAciertos + 1;
+					}
+					respuestasRespondidas = true;
+				}
+			}
+			var respuestaLista = document.getElementById("francia").value;
+			console.log(respuestaLista);
+			if (respuestaLista == "paris"){
+				numeroAciertos = numeroAciertos + 1;
+			}
+			if (!document.getElementById("portugal").value){
+				respuestasRespondidas = false;
+			}else{
+				var respuestaDatalist = document.getElementById("portugal").value;
+				console.log(respuestaDatalist);
+				if (respuestaDatalist == "Lisboa"){
+					numeroAciertos = numeroAciertos + 1;
+				}
+			}
+			if (respuestasRespondidas){
+				document.getElementById("after_submit").style.display = "block";
+				switch (numeroAciertos){
+					case 3:
+						var texto = "<ul><li>Aciertos 3</li><li>Gran trabajo</li><li><img src='win.gif'></li></ul>";
+						break;
+					case 2:
+						var texto = "<ul><li>Aciertos 1 o 2</li><li>Eso está bien</li><li><img src='meh.jpeg'></li></ul>";
+						break;
+					case 1:
+						var texto = "<ul><li>Aciertos 1 o 2</li><li>Eso está bien</li><li><img src='meh.jpeg'></li></ul>";
+						break;
+					case 0:
+						var texto = "<ul><li>Aciertos 0</li><li>Realmente necesitas hacerlo mejor</li><li><img src='lose.gif'></li></ul>";
+						break;
+				}
+				document.getElementById("after_submit").innerHTML = texto + "<br><br>";
+			}
+			else{
+				console.log("Todas las respuestas no estan contestadas");
+			}
+		}
+	</script>
+</body>
+</html>
