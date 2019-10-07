@@ -3,7 +3,6 @@
 <head>
 	<title>Formulario 4</title>
 </head>
-<body>
 	<h1>Madridistimetro</h1>
 	<form action="#">
 		<legend>Portero titular</legend>
@@ -19,7 +18,7 @@
 		</select>
 		<br><br>
 		<label>Numero de copas de Europa</label>
-		<input type="number" name="numeroCopasDeEuropa" min="0" max="20">
+		<input type="number" name="numeroCopasDeEuropa" min="0" max="20" id ="numeroCopasDeEuropa">
 		<br><br>
 		<legend>Jugadores del Real Madrid</legend>
 		<input type="checkbox" value="messi" name="jugadores"><label>Lionel Messi, "la pulga"</label><br>
@@ -31,22 +30,75 @@
 		<input type="checkbox" value="neymar" name="jugadores"><label>Neymar Jr</label><br>
 		<input type="checkbox" value="hazard" name="jugadores"><label>Eden Hazard</label>
 		<br><br>
-		<input list="" name="" id="">
-		<datalist id="">
-			<option value="">
-			<option value="">
-			<option value="">
-			<option value="">
-		</datalist>
-		<div id="after_submit" style="display: none;" name="">kaixo</div>
+		<div id="texto" style="display: none;" name="">kaixo</div>
 		<input type="reset">
-		<input type="button" value="I'm finished" onclick="calificacion()">
+		<input type="button" value="Calificar" onclick="calificacion()">
 	</form>
 	<script type="text/javascript">
-		//corazon _% blanco
-		//umero de aciertos en copas de europa
+		function calificacion(){
+			var radio = document.querySelectorAll("input[type='radio']");
+			var numeroAciertos = 0;
+			var radioRespondido = false;
+			for (let i=0; i<radio.length; i++){
+				if (radio[i].checked == true){
+					radioRespondido = true;
+					var respuestaRadio = radio[i].value;
+					if (respuestaRadio == "courtois"){
+						numeroAciertos = numeroAciertos + 1;
+					}
+					respuestasRespondidas = true;
+				}
+			}
+			document.getElementById("texto").style.display = "block";
+			if (radioRespondido){
+				if (document.getElementById("numeroCopasDeEuropa").value){
+					var numeroCopasDeEuropa = document.getElementById("numeroCopasDeEuropa").value;
+					if (numeroCopasDeEuropa == 13){
+						numeroAciertos = numeroAciertos + 1;
+					}
+					var jugadores = document.querySelectorAll("input[type='checkbox']");
+			        var jugadoresSeleccionados = 0;
+			        for(i=0;i<jugadores.length;i++){
+			        	// Contamos cuantos elementos del checkbox ha seleccionado el usuario
+			            if(jugadores[i].checked==true){
+			                jugadoresSeleccionados = jugadoresSeleccionados + 1;
+			            }
+			        }
+			        // Comprobamos que el usuario ha seleccionado el numero de jugadores del real madrid en la lista
+			        if (jugadoresSeleccionados != 0){
+			        	var jugadoresAcertados = 0;
+				        for(i=0;i<jugadores.length;i++){
+			                switch (jugadores[i].value){
+			                	case "ramos":
+			                		jugadoresAcertados = jugadoresAcertados + 1;
+			                		break;
+			                	case "bale":
+			                		jugadoresAcertados = jugadoresAcertados + 1;
+			                		break;
+			                	case "hazard":
+			                		jugadoresAcertados = jugadoresAcertados + 1;
+			                		break;
+			                	case "kroos":
+			                		jugadoresAcertados = jugadoresAcertados + 1;
+			                		break;
+			                }
+				        }
+				        if (jugadoresAcertados == 4){
+				        	numeroAciertos = numeroAciertos + 1;
+				        }
+				        var porcentajeBlanco = 100 * numeroAciertos / 3;
+				        document.getElementById("texto").innerHTML = "Tu corazón es " + porcentajeBlanco + "% blanco";
+				        document.getElementById("texto").style.display = "block";
+			        }else{
+			        	document.getElementById("texto").innerHTML = "Responde a todas las preguntas";
+			        }
+				}else{
+					document.getElementById("texto").innerHTML = "Responde a todas las preguntas";
+				}
+			}else{
+				document.getElementById("texto").innerHTML = "Responde a todas las preguntas";
+			}
+		}
 	</script>
 </body>
 </html>
-corazon _% blanco
-numero de aciertos en copas de europa
